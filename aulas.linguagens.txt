@@ -1,0 +1,379 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~15/03~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Linguagem imperativa
+	-> Procedural (C)
+	-> Orientado a objs (Java)
+Funcional
+Lógico	(resposta imediata)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~XX~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Linguagem imperativa:
+	Variáveis
+	Fluxo condicional
+		->Laços
+		->"IF's"
+	/\/\/\		OBRIGATÓRIO		/\/\/\
+	Tipo de dados
+	Módulo (.h .c) (Requer no mínimo uma função)
+	Funções
+		Polimorfismo
+			-> Sobrecarga
+				 1  +  1  = 2
+				"1" + "1" = 2
+			-> Paramétrico 
+				A (int b)
+				A (float b)
+			-> Inclusão por subtipagem (O.O)
+				A <- HERDA -- B (B possui mais "coisas" que A)
+
+Mínimo necessário para executar:
+Unidade de compilação
+	-c: Função
+	-Java: Classe
+	-Prolog (Lógica): cláusula
+	-Haskell (Funcional): .hs
+Tipo:
+	Tipagem
+		Forte (declara o tipo)
+		Fraca (Muda para os outros tipos ao longo do programa) (C, JAVA)
+	Dinâmica - mais lenta (JAVA)
+	Estática (C)
+	OBRIGATORIAMENTE, SE TEM TIPAGEM FORTE, É ESTÁTICA, SE É DINAMICO É FRACA. NESTA ORDEM
+Coerção (C)
+	INT <=> Char
+	INT <=> Bytes
+Inferência - Deduz o tipo daquela variável em tempo de compilação
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~22/03~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+T: Conjunto de termos da lógica (V,C,F ϵ T)
+	V: Conjunto de variáveis
+	C: Conjunto de Constantes
+	F: Conjunto dos predicados
+
+Paridade:
+	F(t1,t2,t3,...,tn) -> Paridade de F = n
+	F(a) -> paridade de F = 1
+	G(a,b) -> Paridade de G = 2
+	F(G(a,b)) -> Paridade de F = 1
+
+F: Conjnto das fórmulas
+	1) p(t1,...,tn)
+		x, x ϵ V ou x ϵ C
+		P1(y1,...,yn), t1 ϵ F
+	2)  ⊥ , T
+	3) α , β ϵ F
+		¬α ϵ F
+		α o β ϵ F
+			o = {˄,˅,->, <->}
+		∀(x ϵ V) α ϵ F
+		∃(x ϵ V) α ϵ F
+		(α) ϵ F
+Fórmula atômica
+	f(a)
+	G(f(a,b),c)
+	pai(Abraão, Caim)
+	Casado(João, irmã(Maria))
+Fórmulas não atômicas
+	pai(Abraão, Caim) ˄ pai(Abraão, Abel)
+	∃x ϵ A(x,João)
+	∀X.Gosta(x,Mãe(x))
+Variáveis livres ou ligadas
+	x livre: f(x)
+	x ligada: ∃x.f(x)
+	X ligada e y livre: ∃x.x² = y
+
+		Exemplo 1:
+			Fv(g(x,1,b))
+				Fv(x) U Fv(1) U Fv(b)
+		 		{x} U  ∅ U  {b}
+		 				{x,b}
+		Exemplo2:
+			Fv(f(x,G(1,y)))
+			Fv(x) U Fv(G(1,y))
+			{X} U Fv(1) U Fv(y)
+			{x} U ∅ U {y}
+			 	{x,y}
+
+	Fv(¬α) = Fv(α)
+	Fv(α o β) = Fv(α) Fv(β)
+		o = {˄,˅,->,<->}
+	F(1) = ∅
+	f(T) = ∅
+
+	Fv(∀x.α) = Fv(α)-{x}
+		Exemplo:
+			∀x equal(x²,y)
+				{x,y} - {x}
+					{y}
+
+	Fv(∃x.α) = Fv(α) - {x}
+	Fv((α)) = Fv(α)
+	Fv(α) = ∅ => α é uma fórmula bem formada
+	Fv(α) ≠ ∅ => α é uma fórmula aberta
+
+Substituição
+	X ϵ V
+	S ϲ= F
+	[X |-> S] Y.YϵV=	{ S, se Y = X
+						{ Y, Se y ≠ X
+
+	[X |-> S] C.CϵC = 	C
+		Exemplo:
+			f(x)=x => [x |-> 3] x = 3
+		Exemplo:
+			g(y)=x => [y |-> 3] x = x
+
+	[X |-> S]p(t1,...,tn)= P([X |-> S]y, ..., [X |-> S]tn)
+	[X |-> S] T = T
+	[X |-> S] ⊥ = ⊥
+
+	α,β	 ϵ F
+	[X |-> S] ¬α = ¬([X |-> S]-α)
+	[X |-> S] α o β = ([X |-> S]α) o ([X |-> S]β)
+	[X |-> S] ∀yα =	{∀yα,y=x
+					{∀y([X |-> S]α, y≠x)
+	[X |-> S] ∃yα =	{∃yα,y=x
+					{∃y([X |-> S]α, y≠x)
+		Exemplo:
+			[X |-> 3] (x³=y ˄ ∃x.x+5=8)
+			[X |-> 3](x³=y) ˄ [X |-> 3](∃x.x+5=8)
+			3³=y ˄ ∃x.x+5=8
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~29/03~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Substituições
+ϴ = {X,/t1,...,Xn/tn}
+P(f(X,Z),f(y,a)) {X/a, Y/z, w/b}
+P(f(a,Z),f(Z,a))
+
+
+ϴ = P(X,Y) {X/f(y), Y/b}
+δ = {X/a,Y/z,w/b}
+	
+	(X/f(y)){X/a, Y/Z, W/b} Faz trocas de δ
+	(X/f(Z)){X/a, Y/Z, W/b} Trocou Y por Z
+	(Y/B){} b é constante pq n tem váriavel que ele substitui
+	ϴδ (X/f(Z))
+	ϴδ = {X/f(z),Y/b...}
+
+	yi Não ϵ ϴδ -> ϴδ U {Yi/Si}
+	ϴδ = {X/f(z),Y/b,w/b}	
+
+Formalizado:
+	Δ={X/wi,...,Xn/Wn}	
+	wi = tiδ
+	ϴδ = Δ U {Yi/Si, Y, Não ϵ Δ}
+
+Exemplo 2:
+	ϴ = {A/a,B/f(A),C/X}
+	δ = {A/C,X/b,D/g(x)}
+
+	(A/a)    {A/C, X/b, D/g(x)} = A/a
+	(B/f(A)) {A/C, X/b, D/g(x)} = B/f(C)
+	(C/X)    {A/C, X/b, D/g(x)} = C/b
+		 Δ = {A/a, B/f(C), C/b}
+
+	ϴδ = {A/a, B/f(C), C/b, X/b, D/G(X)}
+
+Idempotente (ϴϴ = ϴ)
+Propriedades (E e F; ϴ, δ, GAMA ϵ S)
+	-E(ϴ6) = (Eϴ)δ
+	-ϴ(δGAMA) = (ϴGAMA)δ
+	-{{ϴ=ϴ}}=ϴ
+	-ϴδ ≠ δϴ
+		{X/f(Y)}{Y/a}={X/f(a),Y/a}
+					≠
+		{Y/a}{X/f(Y)}={Y/a,X/f(Y)}
+
+Programação Lógica
+	Cláusula = T ou F
+		Tom é filho de John
+			child(Tom, John)
+		Ann é filho de Tom
+			child(Ann,Tom)
+		John é filho de Maria
+			child(John,Maria)
+		Alice é filho de John
+			child(Alice,John)
+		Uma pessoa é neto(a) de outra se está é filho/(a) do/(a) filho/(a) daquela
+			grandchild(X,Y) <- child(X,Z) ˄ child (Z,Y)
+
+			Grandchild(tom,Y)
+
+SLD
+	-Começa com letra minúscula => constante
+	-Começa com letra maiúscula => variável
+	----------------------------------------
+	proud(X) <- parente(X,Y), newborn(Y)
+	parent(X,Y) <- father(X,Y)
+	parent(X,Y) <- mother(X,Y)
+	father(Adam,Mary) | newborn(Mary)
+
+	proud(X)
+	parent(X,Y) ˄ newborn(Y)
+	father(X,Y) ˄ newborn(Y)	-> {X/Adam, Y/Mary}
+	father(Adam,Mary) ˄ newborn(Mary)
+	newborn(Mary)
+	[]
+	mother(X,Y) ˄ newborn(Y)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~01/04~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Representar números naturais
+	Zero
+	Succ(N)
+Representar números pares
+	par(zero)
+	par(Succ(Succ(X))) <- par(X)
+Representar números impares
+	impar(Succ(zero))
+	impar(Succ(Succ(X))) <- impar(X)
+				OU
+	impar(Succ(x)) <- par(X)
+
+PROBLEMA: NEGAÇÃO, pois ele tem de percorrer toda a árvora para dar a resposta (loop ou infinito)
+CLOSED WORLD APPROACH (CWA)
+	bom_Atendimento(Jealus)
+	bom_atendimento(francesco)
+	caro(Jealus)
+	razoavel(X) <- not(caro(X))
+
+	Solução de: bom_atendimento(X),razoavel(X)
+		{X/Jealus}
+		->razoavel(Jealus)
+		->not(Caro(Jealus)) 		--DEU FALSO, volta
+		{X/francesco}
+		->razoavel(francesco)
+		->not(caro(francesco))
+		-> []						--Verdadeiro, resposta: {X/francesco}
+	Solução de: razoavel(X),bom_atendimento(X)
+		{X/Jealus}
+		->razoavel(Jealus)
+		->not(Caro(Jealus))
+		NO
+
+
+	Father(X,Y) - Parent(X,Y), Male(X)
+	Parent(ben,tom)
+	Parent(mary,tom)
+	Parent(sam,ben)
+	Parent(alice,ben)
+	Male(ben)
+	Male(sam)
+	Male(tom)
+
+			Father(X,tom)						<- OK, mas percorre toda árvore SEMPRE
+		Parent(X,tom), Male(X)
+		{X/ben}					{X/Mary}
+	   Male(ben)			   Male(mary)
+		  []
+
+	Father(X,Y) - Parent(X,Y),!, Male(X)		<- ! COM USO INDEVIDO
+			Father(X,tom)
+		Parent(X,tom), Male(X)!
+		{X/Mary}
+			!
+			!
+		Male(Mary)
+			FF
+
+	Father(X,Y) - Parent(X,Y), Male(X)!			<- Adequado
+			Father(X,tom)
+		Parent(X,tom), Male(X)!
+		{X/mary}				{X/tom}
+		male(Mary),!				Male(ben),!
+			FF							!
+				   						!
+										!
+										!
+								        []
+
+	plus(zero,X,X)
+	plus(s(X),Y,s(Z)) :- plus(X,Y,Z)
+
+	exemplo1:
+		2+3
+		plus(s(s(zero)), s(s(s(zero))),R)
+		{X1/s(zero), Y1/s(s(s(zero))), R/s(A1),Z/A1}
+		plus(s(zero), s(s(s(zero))), A1)
+		{X2/(zero), Y2/s(s(s(zero))), A1/s(A2),Z/A2}
+		plus(zero, s(s(s(zero))), A2)
+		{A2/s(s(s(zero)))}
+		VOLTA SOLUCIONANDO Ax
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~22/04~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+HASKELL
+
+(+) :: Num a => a -> a -> a
+:t (deduzir o tipo)
+(++) (concatenar listas)
+:r rele arquivo
+:l carrega novo arquivo
+
+Fibonacci:
+fib :: (Eq a, Num a) => a -> a 				<- Problema em números fracionais
+fib :: int -> int  							<- Resolve ao passar número fracionais
+fib 0 = 0
+fib 1 = 1
+fib n = fib(n-1) + fib(n-2)
+
+Fibonacci 2:
+fib' x =
+	if x == 0 then 0 else
+		if x == 1 then 1 else
+			fib' (x-1) + fib' (x-2)
+
+Fibonacci 3:
+fib'' x
+	| x == 0 = 0
+	| x == 1 = 1
+	|otherwise = fib'' (x-1) + fib'' (x-2)
+
+CONCATENAÇÃO
+concat' :: [a] -> [a] -> [a]
+concat' [] ys = ys
+concat' (x:xs) ys = x:(concat' xs ys)
+
+CONCATENAÇÃO (criando operador)
+(<+>) [] ys = ys
+(<+>) (x:xs) ys = x:((<+>) xs ys)
+
+UNIÃO
+union :: 
+union [] _ = []
+union _ [] = []
+union (x:xs) ys
+	--if elem x ys then x:(union xs ys) else union xs ys
+	| elem x ys = x(union xs ys)
+	| otherwise = union xs ys
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~03/05~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MAP :: (a->b) -> [a] -> [b]
+MAP _ [] = []
+MAP f (X:Xs) = f x : MAP f Xs
+
+
+g = MAP (+1)
+g [1..5]
+	RESPOSTA = [1,2,3,4,5,6]
+
+Função anonima:
+	f = (\ x y z -> x*y+z)
+	f 2 2 10
+	RESPOSTA = 14
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~03/05~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~10/05~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+As funções podem ser chamadas de duas formas :
+inter [1...2] [2...5]
+[1...2]  `inter` [2...5]
+MESMO RESULTADO
+
+
+⊥  ≡  ≠ ∀ ∃ α β Γ Δ ¬ ± ˄ ˅ ˂ ˃ δ ϴ ϵ ϶ ϲ ∅

@@ -1,0 +1,43 @@
+1)f(Y), Y/g(a,f(c)), Z/c, A/h(X,W,Z)}
+
+2)
+	nodouble(X,Y)
+	X=[2,3,2,5,5,4,3,1,0]	Y=[2,3,5,4,1,0]
+
+	elem(X,[X|_]).
+	elem(X,[_|Ys]) :- lem(X,Ys).
+
+	nodouble([],[])
+	nodobule([x|Xs], Ys) :- elem(X,Ys), nodouble(Xs,Ys).
+	nodobule([X|Xs],[X|Ys]) :- nodouble(Xs,Ys).
+
+b)	Kth([X|_],0,X)
+	Kth([_|Xs],K,Y) :- Kth(Xs,J,Y), J is K-1.
+
+c)	primo(1).
+	primo(X) :- paux(X,K), K is X/Z.
+	
+	paux(_,1).
+	paux(X,K) :- 0 is mod (X,K), !, fail.
+	paux(X,K) :- N is mod (X,K), M is K-1, paux(X,M).
+
+3)	jogo(_,0,0,[]).
+	jogo([X|Xs], A,N,Ys) :- X > A, jogo(Xs,A,N,Ys).
+	jogo([X|Xs], A,N,[X|Ys]) :- K is A - X, M is N-1, jogo(Xs,K,N,Ys).
+	jogo([_|Xs],A,N,Ys) :- jogo(Xs,A,N,Ys).
+
+4)	propritario(adao, HotelSomosRicos).
+	casado (adao, eva).
+	empregado(Luana).
+	empregado(Lucas).
+	hospede(Jose).
+	hospede(Juana).
+	servem(X,Y) :- (empregado(X); prop(X); (Casado(X,Z),prop(Z))),hosp(Y).
+	odeia(X,Y) :- emp(X), prop(Y).
+	odeia(Eva,Adao).
+	Naogosta(Jose,Eva).
+
+b)	Eva odeia luana, Luana odeia adao, lucas odeia adao.
+
+
+	⊥  ≡  ≠ ∀ ∃ α β Γ Δ ¬ ± ˄ ˅ ˂ ˃ δ ϴ ϵ ϶ ϲ ∅
