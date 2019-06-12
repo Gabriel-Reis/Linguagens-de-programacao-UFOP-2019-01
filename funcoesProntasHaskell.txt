@@ -1,0 +1,44 @@
+elementos
+	even x = par
+	odd x = impar
+
+TUPLAS ():
+	fst(TUPLA) -> primeiro elemento da tupla
+	snd(TUPLA) -> ultimo elemento da tupla
+
+CRIAÇÃO DE DADOS:
+	Type, cria um novo tipo de dado
+	Type Nome = String
+
+
+LISTAS []:
+	head[lista] = retorna head
+	tail[lista] = retorna tail
+	last[lista] = retorna ultimo
+	null [] = verifica se lista esta vazia
+	[1,2] > [0,1] = compara elemento a elemento e retorna bool
+	[Lista] ++ [Lista] = concatena listas
+	(x:xs)
+	reverse[lista]
+	zip [l1][l2] = retorna tuplas (l1,l2)			[1,2][a,b] = [(1,a),(2,b)]
+	init[l] = remove ultimo elem
+	drop n [l] = remove os n primeiro elementos de l
+	take n [l] = retorna os n primeiro elementos de l
+	map (funcao) [lista]					map (+1) [1,2,3] = [2,3,4]
+	filter (condicao) [lista]				filter (>5) [4,5,6,7] = [6,7]
+
+
+foldr (-) 6 [1, 2, 3]
+	3-6
+		2-()
+			1-()
+	= 1-(2-(3-(6))) = -4
+
+
+foldl (-) 6 [1, 2, 3]
+	6-1
+		()-2
+			()-3
+	= 6-1-2-3 = 0
+
+	

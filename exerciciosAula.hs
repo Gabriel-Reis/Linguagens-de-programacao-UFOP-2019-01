@@ -140,20 +140,21 @@ orTern :: Int -> Int -> Int
 orTern a b
     | a == 1 = a
     | b == 1 = b
+    | a == 2 = a
+    | b == 2 = b
     | otherwise = 0
 
 notTern :: Int -> Int
 notTern a
-    | a == 1 = 2
-    | a == 2 = 1
-    |otherwise = 2
+    | a == 1 = 0
+    | a == 2 = 2
+    |otherwise = 1
 
 xorTern :: Int -> Int -> Int
 xorTern a b
-    | a == 2 = a
-    | b == 2 = b
     | andTern a b == 1 = 0
-    | otherwise = 1
+    | orTern a b == 1 = 1
+    | otherwise = 0
 
 -- EXTRA SEM ESTAR NA LISTA
 -- MENU DE LOGICA TERNÁRIA
@@ -172,10 +173,27 @@ euclides a b
 lcm' :: Int -> Int -> Int
 lcm' a b = a*b `div` euclides a b
 
-cosA :: Double -> Double -> Double
-cosA a pres = 
+--cosA :: Double -> Double -> Double
+-- cosA a pres = 
 
--- sum = somatorio de 0 a n   cos(1)
--- Eroo == (Sum + Cos (n+1)) - sum
--- 
--- 
+
+eleva :: Double -> Double -> Double -- 2^2 = 4 -- 2**2 = 4
+eleva a b
+    |b == 0 = 1
+    |otherwise = a * ( eleva a ( b-1 ))
+
+fatorial :: Double -> Double
+fatorial a
+    |a == 1 = 1
+    |otherwise = a * ( fatorial ( a-1 ))
+
+cos :: Double -> Double -> Double
+cos n precisao = somatorio n precisao 1
+
+somatorio ::  Double -> Double -> Double -> Double
+somatorio x precisao n
+    |r < precisao = r
+    |otherwise = somatorio x precisao (n+1)
+    where 
+        r = (eleva -1 n) / a
+        a = ( fatorial(2*n) ) * (eleva x (2*n))
